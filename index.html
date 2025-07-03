@@ -1,20 +1,35 @@
 <!DOCTYPE html>
 <html lang="es">
-<head >
-   <meta charset="UTF-8">
-    <title>Notificcaciones de selección de personal LOES</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-        <!-- jQuery (requerido por Select2) -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- Select2 JS -->
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-      <!-- Select2 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+<head>
+  <meta charset="UTF-8">
+  <title>Notificaciones de selección de personal LOES</title>
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Select2 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+  <!-- Custom Fonts (opcional si se usan) -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- Bootstrap Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <!-- Select2 -->
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+  <!-- DataTables -->
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+</head>
+
 <style>
     body {
         font-family: 'Roboto','Open Sans', Arial, sans-serif; background-color: #ffffff; color: #1D2B4F;
@@ -37,78 +52,91 @@
     }
 
 </style>
-</head>
+
 <body>
 
-<div class="container mt-5">
 <!-- Encabezado personalizado UNEMI -->
-<div class="franja-superior d-flex justify-content-between align-items-center px-3">
-    <div class="d-flex align-items-center">
-      <img src="https://dac-ftd.github.io/pry-admin/img/logo-unemi.png" alt="Logo" class="logo-tigre">
+    <div class="franja-superior d-flex justify-content-between align-items-center px-3">
+        <div class="d-flex align-items-center">
+          <img src="https://dac-ftd.github.io/pry-admin/img/logo-unemi.png" alt="Logo" class="logo-tigre">
+        </div>
+
+        <div class="text-center flex-grow-1">
+            <h2 style="color:white;" class="fw-bold"></h2>
+        </div>
+
+        <div class="d-flex align-items-center justify-content-end">
+            <img src="https://dac-ftd.github.io/pry-admin/img/unemi-logo.png" alt="Logo unemi" class="logo-unemi">
+        </div>
     </div>
 
-    <div class="text-center flex-grow-1">
-        <h2 style="color:white;" class="fw-bold">NOTIFICACIONES - SELECCION DE PERSONAL LOES</h2>
-    </div>
+    <div class="franja-naranja"></div>
 
-    <div class="d-flex align-items-center justify-content-end">
-        <img src="https://dac-ftd.github.io/pry-admin/img/unemi-logo.png" alt="Logo unemi" class="logo-unemi">
-    </div>
-</div>
-<div class="franja-naranja"></div>
-    <ul class="nav nav-tabs" id="fasesTab" role="tablist">
-        <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="fase1-tab" data-bs-toggle="tab" data-bs-target="#fase1" type="button" role="tab">Fase 1</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="fase2-tab" data-bs-toggle="tab" data-bs-target="#fase2" type="button" role="tab">Fase 2</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="fase3-tab" data-bs-toggle="tab" data-bs-target="#fase3" type="button" role="tab">Fase 3</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="fase4-tab" data-bs-toggle="tab" data-bs-target="#fase4" type="button" role="tab">Fase 4</button>
-        </li>
-    </ul>
+    <div class="container mt-3" style="max-width: 900px; justify-content: center;">
+
+        <div class="mb-3">
+            <h4> Notificaciones de selección del personal LOES</h5>
+        </div>
+
+        <ul class="nav nav-tabs" id="fasesTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="fase1-tab" data-bs-toggle="tab" data-bs-target="#fase1" type="button" role="tab">Fase 1</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="fase2-tab" data-bs-toggle="tab" data-bs-target="#fase2" type="button" role="tab">Fase 2</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="fase3-tab" data-bs-toggle="tab" data-bs-target="#fase3" type="button" role="tab">Fase 3</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="fase4-tab" data-bs-toggle="tab" data-bs-target="#fase4" type="button" role="tab">Fase 4</button>
+            </li>
+        </ul>
 
     <div class="tab-content p-3 border border-top-0" id="fasesTabContent">
         <!-- Fase 1 -->
         <div class="tab-pane fade show active" id="fase1" role="tabpanel">
             <h5>Fase 1: Prueba Psicológica y Técnica</h5>
-            <div class="mb-3">
+            <div class="row">
+              <div class="col-md-6 mb-3">
                 <label for="fechaFase1" class="form-label">Fecha de aplicación</label>
                 <input type="date" class="form-control" id="fechaFase1">
-            </div>
-            <div class="mb-3">
+              </div>
+              <div class="col-md-6 mb-3">
                 <label for="horaFase1" class="form-label">Hora</label>
                 <input type="time" class="form-control" id="horaFase1">
+              </div>
             </div>
+
             <div class="mb-3">
                 <label for="lugarFase1" class="form-label">Lugar</label>
                 <input type="text" class="form-control" id="lugarFase1" placeholder="Ejemplo: Auditorio Central">
             </div>
-            <p>Suba aquí el resultado de las pruebas:</p>
-            <input type="file" class="form-control mb-2" id="archivoFase1">
-            <button class="btn btn-primary" onclick="cargarArchivo('archivoFase1', 'Fase 1')">Cargar archivo</button>
+            <p class="mb-1">Subir matriz de postulantes:</p>
+            <input type="file" class="form-control mt-1 mb-3" id="archivoFase1">
+            <button class="btn btn-primary" onclick="cargarArchivo('archivoFase1', 'Fase 1')">Envíar datos</button>
         </div>
 
         <!-- Fase 2 -->
         <div class="tab-pane fade" id="fase2" role="tabpanel">
             <h5>Fase 2: Entrevista</h5>
-            <div class="mb-3">
-                <label for="linkEntrevistaFase2" class="form-label">Link de la entrevista</label>
-                <input type="url" class="form-control" id="linkEntrevistaFase2" placeholder="https://meet.google.com/...">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                  <label for="fechaEntrevistaFase2" class="form-label">Fecha de la entrevista:</label>
+                  <input type="date" class="form-control" id="fechaEntrevistaFase2">
+              </div> 
+              <div class="col-md-6 mb-3">
+                  <label for="linkEntrevistaFase2" class="form-label">Link de la entrevista:</label>
+                  <input type="url" class="form-control" id="linkEntrevistaFase2" placeholder="https://meet.google.com/...">
+              </div>
             </div>
-            <div class="mb-3">
-                <label for="fechaEntrevistaFase2" class="form-label">Fecha de la entrevista</label>
-                <input type="date" class="form-control" id="fechaEntrevistaFase2">
-            </div>
-            <p>Suba aquí el acta o evaluación de la entrevista:</p>
+
+            <p class="mb-1">Subir matriz de postulantes para entrevista:</p>
             <input type="file" class="form-control mb-2" id="archivoFase2">
-            <button class="btn btn-primary mb-4" onclick="cargarArchivoFase2Entrevista()">Cargar archivo</button>
+            <button class="btn btn-primary mb-4" onclick="cargarArchivoFase2Entrevista()">Enviar datos</button>
 
             <div class="mb-3">
-                <label for="tipoSeleccionFase2" class="form-label">Tipo de selección</label>
+                <label for="tipoSeleccionFase2" class="form-label">Vicerrectorado:</label>
                 <select class="form-select" id="tipoSeleccionFase2">
                     <option value="">Seleccione una opción</option>
                     <option value="Vicerrectorado de investigación y de posgrado">Vicerrectorado de Investigación y de Posgrado</option>
@@ -117,28 +145,30 @@
                 </select>
             </div>
 
-            <p>Suba aquí la matriz de evaluación:</p>
+            <p class="mb-1">Subir matriz de comite para entrevista:</p>
             <input type="file" class="form-control mb-2" id="matrizFase2">
-            <button class="btn btn-secondary" onclick="cargarArchivoFase2Matriz()">Cargar matriz</button>
+            <button class="btn btn-primary" onclick="cargarArchivoFase2Matriz()">Enviar datos</button>
         </div>
 
         <!-- Fase 3 -->
         <div class="tab-pane fade" id="fase3" role="tabpanel">
             <h5>Fase 3: Documentación</h5>
-            <div class="mb-3">
-                <label for="fechaRecepcionFase3" class="form-label">Fecha de recepción</label>
-                <input type="date" class="form-control" id="fechaRecepcionFase3">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                  <label for="fechaRecepcionFase3" class="form-label">Fecha de recepción</label>
+                  <input type="date" class="form-control" id="fechaRecepcionFase3">
+              </div>
+              <div class="col-md-6 mb-3">
+                  <label for="horaRecepcionFase3" class="form-label">Hora de recepción</label>
+                  <input type="time" class="form-control" id="horaRecepcionFase3">
+              </div>
             </div>
-            <div class="mb-3">
-    <label for="horaRecepcionFase3" class="form-label">Hora de recepción</label>
-    <input type="time" class="form-control" id="horaRecepcionFase3">
-</div>
 
             <div class="mb-3">
                 <label for="fechaInicioGestionFase3" class="form-label">Fecha de inicio de gestión</label>
                 <input type="date" class="form-control" id="fechaInicioGestionFase3">
             </div>
-            <p>Suba aquí los documentos recibidos:</p>
+            <p class="mb-1">Suba aquí los documentos recibidos:</p>
             <input type="file" class="form-control mb-2" id="archivoFase3">
             <button class="btn btn-primary" onclick="cargarArchivoFase3()">Cargar archivo</button>
         </div>
@@ -146,20 +176,23 @@
         <!-- Fase 4 -->
         <div class="tab-pane fade" id="fase4" role="tabpanel">
             <h5>Fase 4: Vinculación</h5>
-            <div class="mb-3">
-                <label for="fechaRecepcionFase4" class="form-label">Fecha de recepción</label>
-                <input type="date" class="form-control" id="fechaRecepcionFase4">
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                  <label for="fechaRecepcionFase4" class="form-label">Fecha de recepción</label>
+                  <input type="date" class="form-control" id="fechaRecepcionFase4">
+              </div>
+              <div class="col-md-6 mb-3">
+                  <label for="fechaInicioGestionFase4" class="form-label">Fecha de inicio de gestión</label>
+                  <input type="date" class="form-control" id="fechaInicioGestionFase4">
+              </div>
             </div>
-            <div class="mb-3">
-                <label for="fechaInicioGestionFase4" class="form-label">Fecha de inicio de gestión</label>
-                <input type="date" class="form-control" id="fechaInicioGestionFase4">
-            </div>
-            <p>Suba aquí el contrato o acta de vinculación:</p>
+            <p class="mb-1">Suba aquí el contrato o acta de vinculación:</p>
             <input type="file" class="form-control mb-2" id="archivoFase4">
             <button class="btn btn-primary" onclick="cargarArchivoFase4()">Cargar archivo</button>
         </div>
     </div>
-</div>
+    </div>
 
 <script>
 const WEBHOOK_ACTIVO = true;
