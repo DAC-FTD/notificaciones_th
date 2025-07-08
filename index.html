@@ -135,18 +135,52 @@
             <input type="file" class="form-control mb-2" id="archivoFase2">
             <button class="btn btn-primary mb-4" onclick="cargarArchivoFase2Entrevista()">Enviar datos</button>
 
-            <div class="mb-3">
-                <label for="tipoSeleccionFase2" class="form-label">Vicerrectorado:</label>
-                <select class="form-select" id="tipoSeleccionFase2">
-                    <option value="">Seleccione una opción</option>
-                    <option value="Vicerrectorado de investigación y de posgrado">Vicerrectorado de Investigación y de Posgrado</option>
-                    <option value="Vicerrectorado académico de formación de grado">Vicerrectorado Académico de Formación de Grado</option>
-                    <option value="Vicerrectorado de vinculación">Vicerrectorado de Vinculación</option>
-                </select>
+            <!-- Fase 2 sección Comisión -->
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="horarioDesdeFase2" class="form-label">Horario desde:</label>
+                    <input type="time" class="form-control" id="horarioDesdeFase2">
+                </div> 
+                <div class="col-md-6 mb-3">
+                    <label for="horarioHastaFase2" class="form-label">Horario hasta:</label>
+                    <input type="time" class="form-control" id="horarioHastaFase2">
+                </div>
             </div>
 
-            <p class="mb-1">Subir matriz de comite para entrevista:</p>
-            <input type="file" class="form-control mb-2" id="matrizFase2">
+            <div class="mb-3">
+                <label for="procesoVigenteFase2" class="form-label">Proceso vigente:</label>
+                <input type="text" class="form-control" id="procesoVigenteFase2" placeholder="Descripción del proceso vigente">
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="tipoSeleccionFase2" class="form-label">Vicerrectorado:</label>
+                    <select class="form-select" id="tipoSeleccionFase2" onchange="actualizarCorreoVicerrectorado()">
+                        <option value="">Seleccione una opción</option>
+                        <option value="Vicerrectorado de investigación y de posgrado">Vicerrectorado de Investigación y de Posgrado</option>
+                        <option value="Vicerrectorado académico de formación de grado">Vicerrectorado Académico de Formación de Grado</option>
+                        <option value="Vicerrectorado de vinculación">Vicerrectorado de Vinculación</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label for="correoVicerrectoradoFase2" class="form-label">Correo Vicerrectorado:</label>
+                    <input type="email" class="form-control" id="correoVicerrectoradoFase2" placeholder="correo@vicerrectorado.com">
+                </div>                
+            </div>
+
+            <div class="row">
+                <div class="mb-3">
+                    <label for="correoRectoradoFase2" class="form-label">Correo Rectorado (editable):</label>
+                    <input type="email" class="form-control" id="correoRectoradoFase2" value="rectorado@unemi.edu.ec">
+                </div>
+
+                <div class="mb-3">
+                    <label for="correoTalentoHumanoFase2" class="form-label">Correo Talento Humano (editable):</label>
+                    <input type="email" class="form-control" id="correoTalentoHumanoFase2" value="talento@unemi.edu.ec">
+                </div>
+            </div>
+
             <button class="btn btn-primary" onclick="cargarArchivoFase2Matriz()">Enviar datos</button>
         </div>
 
@@ -171,7 +205,7 @@
             <p class="mb-1">Suba aquí los documentos recibidos:</p>
             <input type="file" class="form-control mb-2" id="archivoFase3">
             <button class="btn btn-primary" onclick="cargarArchivoFase3()">Enviar datos
-
+        </div>
         <!-- Fase 4 -->
         <div class="tab-pane fade" id="fase4" role="tabpanel">
             <h5>Fase 4: Vinculación</h5>
@@ -190,11 +224,28 @@
             <input type="file" class="form-control mb-2" id="archivoFase4">
             <button class="btn btn-primary" onclick="cargarArchivoFase4()">Enviar datos</button>
         </div>
-    </div>
+    
     </div>
 
 <script>
 const WEBHOOK_ACTIVO = true;
+
+function actualizarCorreoVicerrectorado() {
+    const vicerrectorado = document.getElementById('tipoSeleccionFase2').value;
+    const correoVicerrectorado = document.getElementById('correoVicerrectoradoFase2');
+
+    // Asigna el correo correspondiente al vicerrectorado seleccionado
+    if (vicerrectorado === "Vicerrectorado de investigación y de posgrado") {
+        correoVicerrectorado.value = "investigacion@vicerrectorado.com";
+    } else if (vicerrectorado === "Vicerrectorado académico de formación de grado") {
+        correoVicerrectorado.value = "formacion@vicerrectorado.com";
+    } else if (vicerrectorado === "Vicerrectorado de vinculación") {
+        correoVicerrectorado.value = "vinculacion@vicerrectorado.com";
+    } else {
+        // Si no se selecciona ninguna opción, el campo queda vacío
+        correoVicerrectorado.value = "";
+    }
+}
 
 function cargarArchivo(inputId, nombreFase, extraData = {}, webhookURL = "https://hook.us2.make.com/7rfyahjtnijkeur2ojbc8v74as1fweo1") {
     if (!WEBHOOK_ACTIVO) {
@@ -205,10 +256,11 @@ function cargarArchivo(inputId, nombreFase, extraData = {}, webhookURL = "https:
     const archivoInput = document.getElementById(inputId);
     const archivo = archivoInput.files[0];
 
-    if (!archivo) {
+    if (!archivo && nombreFase !== "Fase 2 - Matriz") {
         Swal.fire('Advertencia', 'Debe seleccionar un archivo antes de cargar.', 'warning');
         return;
     }
+
 
     const formData = new FormData();
 
@@ -222,7 +274,10 @@ function cargarArchivo(inputId, nombreFase, extraData = {}, webhookURL = "https:
         formData.append(key, extraData[key]);
     }
 
-    formData.append("archivo", archivo);
+     if (nombreFase !== "Fase 2 - Matriz" && archivo) {
+            formData.append("archivo", archivo);
+        }
+    
     formData.append("fase", nombreFase);
 
     fetch(webhookURL, {
@@ -259,19 +314,31 @@ function cargarArchivoFase2Entrevista() {
 }
 
 function cargarArchivoFase2Matriz() {
-    const tipo = document.getElementById('tipoSeleccionFase2')?.value.trim();
-    const link = document.getElementById('linkEntrevistaFase2')?.value.trim();
-    const fecha = document.getElementById('fechaEntrevistaFase2')?.value.trim();
+    const tipo = document.getElementById('tipoSeleccionFase2').value.trim();
+    const link = document.getElementById('linkEntrevistaFase2').value.trim();
+    const fecha = document.getElementById('fechaEntrevistaFase2').value.trim();
+    const correoVicerrectorado = document.getElementById('correoVicerrectoradoFase2').value.trim();
+    const procesoVigente = document.getElementById('procesoVigenteFase2').value.trim();
+    const horarioDesde = document.getElementById('horarioDesdeFase2').value.trim();
+    const horarioHasta = document.getElementById('horarioHastaFase2').value.trim();
+    const correoRectorado = document.getElementById('correoRectoradoFase2').value.trim();
+    const correoTalentoHumano = document.getElementById('correoTalentoHumanoFase2').value.trim();
 
-    if (!tipo) {
-        Swal.fire('Advertencia', 'Debe seleccionar el tipo de selección para cargar la matriz.', 'warning');
+    if (!tipo || !link || !fecha || !correoVicerrectorado || !procesoVigente || !horarioDesde || !horarioHasta) {
+        Swal.fire('Advertencia', 'Debe completar todos los campos antes de enviar el formulario.', 'warning');
         return;
     }
 
-    cargarArchivo('matrizFase2', 'Fase 2 - Matriz', {
+    cargarArchivo('archivoFase2', 'Fase 2 - Matriz', {
         tipoSeleccion: tipo,
         linkEntrevista: link,
-        fechaEntrevista: fecha
+        fechaEntrevista: fecha,
+        correoVicerrectorado: correoVicerrectorado,
+        procesoVigente: procesoVigente,
+        horarioDesde: horarioDesde,
+        horarioHasta: horarioHasta,
+        correoRectorado: correoRectorado,
+        correoTalentoHumano: correoTalentoHumano
     });
 }
 
